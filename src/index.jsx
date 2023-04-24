@@ -1,10 +1,14 @@
-import './index.less';
-import React from 'react';
-import { render } from 'react-dom';
-import App from './components/app.jsx';
+import React from "react";
+import App from "./components/App";
+import { createRoot } from "react-dom/client";
+import { Provider } from "react-redux";
+import store from "./components/reducers/index.js";
 
+const rootElement = document.getElementById("root");
+const root = createRoot(rootElement);
 
-render(
-    <App />, 
-    document.getElementById('root')
+root.render(
+  <Provider store={store}>
+    <App />
+  </Provider>
 );

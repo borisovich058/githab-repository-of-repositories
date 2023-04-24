@@ -1,6 +1,7 @@
 const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+require("@babel/polyfill");
 
 module.exports = {
   mode: "development",
@@ -11,12 +12,20 @@ module.exports = {
   },
   devServer: {
     port: 3000,
+    hot: true,
+    static: {
+      directory: path.join(__dirname, "./dist"),
+    },
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ["", ".js", ".jsx", ".es6"],
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: "./src/index.html" }),
+    new HtmlWebpackPlugin({
+      filename: "index.html",
+      template: "./src/index.html",
+      publicPath: "/",
+    }),
     new CleanWebpackPlugin(),
   ],
   module: {
@@ -30,25 +39,15 @@ module.exports = {
         use: ["file-loader"],
       },
       {
-        test: /\.m?js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-env']
-          }
-        }
+            presets: ["@babel/preset-env", "@babel/preset-react"],
+          },
+        },
       },
-      {
-        test: /\.m?jsx$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-react", "@babel/preset-env"]
-          }
-        }
-      }
     ],
   },
 };
