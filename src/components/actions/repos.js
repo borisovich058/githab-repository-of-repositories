@@ -1,6 +1,7 @@
 import { Octokit } from "@octokit/core";
 import axios from "axios";
-import { setRepositories } from "../reducers/reposReducer";
+import { setRepos } from "../reducers/reposReducer";
+// import { setRepositories } from "../reducers/reposReducer";
 
 const getRepos = (searchQuery = "stars:%3E1") => {
   return async (dispatch) => {
@@ -13,7 +14,7 @@ const getRepos = (searchQuery = "stars:%3E1") => {
         },
       }
     );
-    await dispatch(setRepositories(response.data));
+    await dispatch(setRepos(response.data));
   };
 };
 
