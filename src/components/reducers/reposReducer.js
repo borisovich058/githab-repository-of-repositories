@@ -8,11 +8,15 @@ export const reposSlice = createSlice({
   },
   reducers: {
     setRepos: (state, action) => {
-       state.items = action.payload.items
+       state.items = action.payload.items,
+       state.isFetching = false
       },
+    setIsFetching: (state, action) => {
+      state.isFetching = action.payload
+    }
   }
 })
 
-export const { setRepos } = reposSlice.actions
+export const { setRepos, setIsFetching } = reposSlice.actions
 
 export default reposSlice.reducer
