@@ -16,6 +16,7 @@ module.exports = {
     static: {
       directory: path.join(__dirname, "./dist"),
     },
+    historyApiFallback: true,
   },
   resolve: {
     extensions: ["", ".js", ".jsx", ".es6"],
